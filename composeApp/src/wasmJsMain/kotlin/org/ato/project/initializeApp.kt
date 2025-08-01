@@ -2,6 +2,8 @@ package org.ato.project
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+
+var firebaseApp: JsAny? = null
 @JsModule("firebase/app")
 external fun initializeApp(config: JsAny): JsAny
 
@@ -26,8 +28,8 @@ val createFirebaseConfig: JsAny = js(
 fun Configure() {
     LaunchedEffect(Unit) {
         try {
-            val app = initializeApp(createFirebaseConfig)
-            val analytics = getAnalytics(app)
+            firebaseApp = initializeApp(createFirebaseConfig)
+            val analytics = getAnalytics(firebaseApp)
             println("Firebase initialized successfully")
         } catch (e: Throwable) {
             println("Firebase init error: ${e.message}")
