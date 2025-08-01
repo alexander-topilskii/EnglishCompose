@@ -68,7 +68,7 @@ fun AiDiphthongLesson(onBack: () -> Unit) {
 @Composable
 fun OiDiphthongLesson(onBack: () -> Unit) {
     BaseLessonScreen(
-        title = "/ɔɪ/ — дифтонг",
+        title = "\uD83D\uDD09 /ɔɪ/ — дифтонг", // Adding speaker emoji as fallback
         subtitle = "Практика: boy, coin, noise",
         onBack = onBack
     )

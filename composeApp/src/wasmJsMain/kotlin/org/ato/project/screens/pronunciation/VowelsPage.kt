@@ -20,7 +20,7 @@ fun VowelsPage(
             items = listOf(
                 NavItem(
                     id = "short-vowels-1",
-                    title = "Короткие гласные (/ɪ/, /æ/, /e/)", 
+                    title = "Короткие гласные \uD83D\uDD09 (/ɪ/, /æ/, /e/)", 
                     description = "Практика минимальных пар",
                     categoryId = "short-vowels",
                     onClick = { onNavigateToLesson("short-vowels-1") }

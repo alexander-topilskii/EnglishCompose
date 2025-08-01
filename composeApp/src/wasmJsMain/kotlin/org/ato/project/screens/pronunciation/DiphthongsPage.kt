@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.Color
 import org.ato.project.components.NavCategory
 import org.ato.project.components.NavItem
 import org.ato.project.components.NavigationTemplate
+import org.ato.project.theme.PhoneticFont
 
 @Composable
 fun DiphthongsPage(
@@ -76,7 +77,7 @@ fun DiphthongsPage(
                 ),
                 NavItem(
                     id = "oi-diphthong",
-                    title = "/ɔɪ/ — Практика", 
+                    title = "\uD83D\uDD09 /ɔɪ/ — Практика", // Using sound emoji as a prefix helps identify it even if font fails
                     description = "boy, coin, noise",
                     categoryId = "closing-diphthongs",
                     onClick = { onNavigateToLesson("oi-diphthong") }
