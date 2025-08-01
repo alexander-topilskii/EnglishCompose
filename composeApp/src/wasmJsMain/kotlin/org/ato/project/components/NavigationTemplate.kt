@@ -35,7 +35,8 @@ data class NavItem(
 data class NavCategory(
     val id: String,
     val name: String,
-    val color: Color
+    val color: Color,
+    val items: List<NavItem> = emptyList()
 )
 
 /**
@@ -43,8 +44,7 @@ data class NavCategory(
  * with categorized items displayed as cards.
  *
  * @param title The title of the navigation page
- * @param categories List of categories to organize navigation items
- * @param items List of navigation items to display
+ * @param categories List of categories, each containing its own navigation items
  * @param onBack Callback for handling back navigation, null if it's a root page
  * @param modifier Modifier for the component
  */
@@ -53,7 +53,6 @@ data class NavCategory(
 fun NavigationTemplate(
     title: String,
     categories: List<NavCategory>,
-    items: List<NavItem>,
     onBack: (() -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
@@ -70,15 +69,14 @@ fun NavigationTemplate(
         }
     }
 
-    // Filter items based on selected categories
-    val filteredItems = if (selectedCategories.isEmpty() || selectedCategories.none { it.value }) {
-        items
+    // Filter categories based on selection
+    val filteredCategories = if (selectedCategories.isEmpty() || selectedCategories.none { it.value }) {
+        // If no categories selected, show all
+        categories
     } else {
-        items.filter { item -> selectedCategories[item.categoryId] == true }
+        // Show only selected categories
+        categories.filter { category -> selectedCategories[category.id] == true }
     }
-
-    // Group items by category
-    val groupedItems = filteredItems.groupBy { it.categoryId }
 
     Scaffold(
         topBar = {
@@ -142,10 +140,8 @@ fun NavigationTemplate(
                 verticalArrangement = Arrangement.spacedBy(24.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                categories.forEach { category ->
-                    val categoryItems = groupedItems[category.id] ?: emptyList()
-
-                    if (categoryItems.isNotEmpty()) {
+                filteredCategories.forEach { category ->
+                    if (category.items.isNotEmpty()) {
                         item {
                             Column {
                                 // Category header
@@ -176,13 +172,13 @@ fun NavigationTemplate(
                                     userScrollEnabled = false,  // Prevent nested scrolling
                                     modifier = Modifier.height(
                                         if (isMobile) {
-                                            (categoryItems.size * 150).dp
+                                            (category.items.size * 150).dp
                                         } else {
-                                            ((categoryItems.size + 2) / 3 * 150).dp
+                                            ((category.items.size + 2) / 3 * 150).dp
                                         }
                                     )
                                 ) {
-                                    items(categoryItems) { item ->
+                                    items(category.items) { item ->
                                         NavigationCard(
                                             item = item,
                                             categoryColor = category.color
