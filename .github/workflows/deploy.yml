@@ -1,0 +1,42 @@
+name: Deploy Kotlin/Wasm Compose to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # ✅ запуск при пуше в main
+
+permissions:
+  contents: write  # 🔐 разрешает пуш в gh-pages
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧾 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ☕ Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: 🗂️ Cache Gradle
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts') }}
+          restore-keys: ${{ runner.os }}-gradle
+
+      - name: 🛠️ Build project (wasmJs)
+        run: ./gradlew wasmJsBrowserDistribution --no-daemon
+
+      - name: 🚀 Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/dist/wasmJs/browser  # 📦 выходная папка
+          publish_branch: gh-pages
