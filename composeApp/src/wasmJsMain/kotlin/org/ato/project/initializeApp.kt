@@ -37,3 +37,9 @@ fun Configure() {
         }
     }
 }
+
+fun getUserDisplayName(): String? {
+    val auth = getAuth(firebaseApp) as FirebaseAuth
+    val currentUser = auth.currentUser
+    return currentUser?.displayName
+}

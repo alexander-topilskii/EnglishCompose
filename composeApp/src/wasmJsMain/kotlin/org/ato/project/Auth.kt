@@ -13,3 +13,13 @@ external fun signInWithPopup(auth: JsAny, provider: JsAny): Promise<JsAny>
 
 @JsName("GoogleAuthProvider")
 external class GoogleAuthProvider : JsAny
+
+external interface FirebaseAuth : JsAny {
+    val currentUser: FirebaseUser?
+}
+
+external interface FirebaseUser : JsAny {
+    val displayName: String?
+}
+
+

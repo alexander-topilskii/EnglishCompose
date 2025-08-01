@@ -32,7 +32,9 @@ fun App() {
                     navController = navController,
                     onLogin = {
                         println("sdfdsfsd")
-                        loginWithGoogle() }
+                        loginWithGoogle()
+                        println("sds : ${getUserDisplayName()}")
+                    }
                 )
             }
 
@@ -279,7 +281,7 @@ fun loginWithGoogle(onResult: (Boolean) -> Unit = {}) {
         println("Login with Google2")
 
         signInWithPopup(auth, provider).then({ _: JsAny ->
-            println("Login successful")
+            println("Login successful ${getUserDisplayName()}")
             onResult(true)
             null
         }, { error: JsAny ->
