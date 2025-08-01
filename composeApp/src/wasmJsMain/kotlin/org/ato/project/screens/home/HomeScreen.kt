@@ -63,35 +63,35 @@ fun HomeScreen(
                     title = "Дифтонги", 
                     description = "Дифтонги и их произношение",
                     categoryId = "pronunciation",
-                    onClick = { navController.navigate("diphthongs") }
+                    onClick = { navController?.navigate("diphthongs") }
                 ),
                 NavItem(
                     id = "consonants",
                     title = "Согласные звуки", 
                     description = "Артикуляция и практика согласных звуков",
                     categoryId = "pronunciation",
-                    onClick = { navController.navigate("consonants") }
+                    onClick = { navController?.navigate("consonants") }
                 ),
                 NavItem(
                     id = "word-stress",
                     title = "Ударение и ритм", 
                     description = "Ударение и ритм в английском языке",
                     categoryId = "pronunciation",
-                    onClick = { navController.navigate("word-stress") }
+                    onClick = { navController?.navigate("word-stress") }
                 ),
                 NavItem(
                     id = "intonation",
                     title = "Интонация", 
                     description = "Интонация и связная речь",
                     categoryId = "pronunciation",
-                    onClick = { navController.navigate("intonation") }
+                    onClick = { navController?.navigate("intonation") }
                 ),
                 NavItem(
                     id = "russian-comparison",
                     title = "Сравнение с русским", 
                     description = "Типичные ошибки и способы их исправления",
                     categoryId = "pronunciation",
-                    onClick = { navController.navigate("russian-comparison") }
+                    onClick = { navController?.navigate("russian-comparison") }
                 )
             )
         ),
