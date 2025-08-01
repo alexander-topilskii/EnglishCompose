@@ -3,7 +3,7 @@ name: Deploy Kotlin/Wasm to Firebase Hosting
 on:
   push:
     branches:
-      - main  # деплой при пуше в main
+      - main
 
 permissions:
   contents: read
@@ -35,7 +35,7 @@ jobs:
         run: ./gradlew wasmJsBrowserDistribution --no-daemon
 
       - name: 🚀 Deploy to Firebase Hosting
-        uses: w9jds/firebase-action@v13
+        uses: w9jds/firebase-action@v12.9.0
         with:
           args: deploy --only hosting
         env:
