@@ -13,6 +13,12 @@ external fun signInWithPopup(auth: JsAny, provider: JsAny): Promise<JsAny>
 @JsName("signOut")
 external fun signOut(auth: JsAny): Promise<JsAny>
 
+@JsName("setPersistence")
+external fun setPersistence(auth: JsAny, persistence: JsAny): Promise<JsAny>
+
+@JsName("browserLocalPersistence")
+external val browserLocalPersistence: JsAny
+
 @JsName("GoogleAuthProvider")
 external class GoogleAuthProvider : JsAny
 
