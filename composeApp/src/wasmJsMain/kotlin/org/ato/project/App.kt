@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import org.ato.project.screens.HomeScreen
+import org.ato.project.screens.home.HomeScreen
 import org.ato.project.screens.details.DetailsScreen
 import org.ato.project.screens.examples.ExamplesPage
 

@@ -1,4 +1,4 @@
-package org.ato.project.screens
+package org.ato.project.screens.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
