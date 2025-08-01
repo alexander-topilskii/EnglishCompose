@@ -3,7 +3,7 @@ package org.ato.project
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 
-import getAnalytics
+import org.ato.project.firebase.getAnalytics
 import org.ato.project.firebase.initializeApp
 import kotlin.js.JsAny
 
