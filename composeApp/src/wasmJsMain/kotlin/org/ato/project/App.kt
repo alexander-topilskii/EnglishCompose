@@ -13,6 +13,7 @@ import org.ato.project.screens.pronunciation.lessons.*
 import org.ato.project.screens.words.*
 import org.ato.project.navigation.NavigationHandler
 import org.ato.project.loginWithGoogle
+import kotlin.js.JsAny
 
 @Composable
 fun App() {
