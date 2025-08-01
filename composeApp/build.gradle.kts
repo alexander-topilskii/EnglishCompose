@@ -44,6 +44,11 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
+        val wasmJsMain by getting {
+            dependencies {
+                implementation(npm("firebase", "10.12.2"))  // Или актуальную версию, проверьте на npmjs.com
+            }
+        }
     }
 }
 
