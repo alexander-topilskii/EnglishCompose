@@ -44,6 +44,7 @@ data class NavCategory(
  * with categorized items displayed as cards.
  *
  * @param title The title of the navigation page
+ * @param subtitle Optional subtitle for the page
  * @param categories List of categories, each containing its own navigation items
  * @param onBack Callback for handling back navigation, null if it's a root page
  * @param modifier Modifier for the component
@@ -52,6 +53,7 @@ data class NavCategory(
 @Composable
 fun NavigationTemplate(
     title: String,
+    subtitle: String? = null,
     categories: List<NavCategory>,
     onBack: (() -> Unit)? = null,
     modifier: Modifier = Modifier
@@ -106,11 +108,20 @@ fun NavigationTemplate(
             // Determine if mobile-like layout (< 768dp ~ tablets/phones)
             val isMobile = screenWidth < 768.dp
 
-            // Category filter chips
+            // Subtitle and category filter chips
             Column(
                 modifier = Modifier.fillMaxWidth().padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                // Display subtitle if provided
+                subtitle?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.bodyLarge,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+                }
                 // Category filter row with colored chips
                 Row(
                     modifier = Modifier.fillMaxWidth(),

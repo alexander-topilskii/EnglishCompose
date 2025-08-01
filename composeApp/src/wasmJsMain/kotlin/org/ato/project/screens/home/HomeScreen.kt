@@ -14,58 +14,79 @@ fun HomeScreen(
     // Define categories with their items
     val categories = listOf(
         NavCategory(
-            id = "demos", 
-            name = "Demo Pages", 
+            id = "words", 
+            name = "Слова", 
             color = Color(0xFF5B8EDB),
             items = listOf(
                 NavItem(
-                    id = "details",
-                    title = "Details Page", 
-                    description = "View a simple details page example",
-                    categoryId = "demos",
-                    onClick = onNavigateToDetails
+                    id = "verbs",
+                    title = "Глаголы", 
+                    description = "Изучение английских глаголов",
+                    categoryId = "words",
+                    onClick = { /* TODO */ }
                 ),
                 NavItem(
-                    id = "settings",
-                    title = "Settings", 
-                    description = "Application configuration",
-                    categoryId = "demos",
+                    id = "adjectives",
+                    title = "Прилагательные", 
+                    description = "Изучение английских прилагательных",
+                    categoryId = "words",
+                    onClick = { /* TODO */ }
+                ),
+                NavItem(
+                    id = "nouns",
+                    title = "Существительные", 
+                    description = "Изучение английских существительных",
+                    categoryId = "words",
                     onClick = { /* TODO */ }
                 )
             )
         ),
         NavCategory(
-            id = "tools", 
-            name = "Interactive Tools", 
+            id = "pronunciation", 
+            name = "Произношение", 
             color = Color(0xFF26A69A),
             items = listOf(
                 NavItem(
-                    id = "calculator",
-                    title = "Calculator", 
-                    description = "Basic arithmetic calculator",
-                    categoryId = "tools",
+                    id = "vowels",
+                    title = "Гласные звуки", 
+                    description = "Гласные звуки и их перекрестное сравнение",
+                    categoryId = "pronunciation",
+                    onClick = onNavigateToExamples
+                ),
+                NavItem(
+                    id = "consonants",
+                    title = "Согласные звуки", 
+                    description = "Артикуляция и практика согласных звуков",
+                    categoryId = "pronunciation",
+                    onClick = { /* TODO */ }
+                ),
+                NavItem(
+                    id = "consonant-clusters",
+                    title = "Сочетания согласных", 
+                    description = "Практика произношения сложных сочетаний",
+                    categoryId = "pronunciation",
+                    onClick = { /* TODO */ }
+                ),
+                NavItem(
+                    id = "word-stress",
+                    title = "Ударение в словах", 
+                    description = "Правила и практика ударений",
+                    categoryId = "pronunciation",
                     onClick = { /* TODO */ }
                 )
             )
         ),
         NavCategory(
-            id = "examples", 
-            name = "Examples", 
+            id = "idioms", 
+            name = "Фразеологизмы", 
             color = Color(0xFFEF6C00),
             items = listOf(
                 NavItem(
-                    id = "examples",
-                    title = "Examples Gallery", 
-                    description = "Browse various code examples",
-                    categoryId = "examples",
-                    onClick = onNavigateToExamples
-                ),
-                NavItem(
-                    id = "about",
-                    title = "About", 
-                    description = "Information about this application",
-                    categoryId = "examples",
-                    onClick = { /* TODO */ }
+                    id = "idioms-gallery",
+                    title = "Галерея фразеологизмов", 
+                    description = "Изучение английских идиом и выражений",
+                    categoryId = "idioms",
+                    onClick = onNavigateToDetails
                 )
             )
         )

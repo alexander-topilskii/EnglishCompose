@@ -7,7 +7,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.ato.project.screens.home.HomeScreen
 import org.ato.project.screens.details.DetailsScreen
-import org.ato.project.screens.examples.ExamplesPage
 
 @Composable
 fun App() {
@@ -24,9 +23,6 @@ fun App() {
             }
             composable("details") {
                 DetailsScreen(onNavigateBack = { navController.popBackStack() })
-            }
-            composable("examples") {
-                ExamplesPage(onBack = { navController.popBackStack() })
             }
         }
     }
