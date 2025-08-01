@@ -5,6 +5,10 @@ import androidx.compose.runtime.LaunchedEffect
 
 import org.ato.project.firebase.getAnalytics
 import org.ato.project.firebase.initializeApp
+// Auth related imports
+import org.ato.project.browserLocalPersistence
+import org.ato.project.getAuth
+import org.ato.project.setPersistence
 import kotlin.js.JsAny
 
 
@@ -34,6 +38,15 @@ fun Configure() {
             firebaseApp = initializeApp(firebaseConfig)
             val analytics = getAnalytics(firebaseApp)
             println("Firebase initialized successfully $firebaseApp")
+
+            val auth = getAuth(firebaseApp)
+            setPersistence(auth, browserLocalPersistence).then({ _: JsAny ->
+                println("Auth persistence configured")
+                null
+            }, { error: JsAny ->
+                println("Auth persistence error: ${'$'}{error ?: error.toString()}")
+                null
+            })
 
         } catch (e: Throwable) {
             println("Firebase init error: ${e.message}")

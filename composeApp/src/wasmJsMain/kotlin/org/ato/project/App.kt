@@ -299,12 +299,19 @@ fun loginWithGoogle(onResult: (Boolean) -> Unit = {}) {
         val provider = GoogleAuthProvider()
         println("Login with Google2")
 
-        signInWithPopup(auth, provider).then({ _: JsAny ->
-            println("Login successful ${getUserDisplayName()}")
-            onResult(true)
+        setPersistence(auth, browserLocalPersistence).then({ _: JsAny ->
+            signInWithPopup(auth, provider).then({ _: JsAny ->
+                println("Login successful ${getUserDisplayName()}")
+                onResult(true)
+                null
+            }, { error: JsAny ->
+                println("Login error: ${error ?: error.toString()}")
+                onResult(false)
+                null
+            })
             null
         }, { error: JsAny ->
-            println("Login error: ${error ?: error.toString()}")
+            println("Persistence error: ${error ?: error.toString()}")
             onResult(false)
             null
         })
