@@ -7,26 +7,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import org.ato.project.components.AdaptiveScreen
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IdiomsPage(onBack: () -> Unit) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Фразеологизмы") },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Text("←")
-                    }
-                }
-            )
-        }
-    ) { padding ->
+    AdaptiveScreen(
+        title = "Фразеологизмы",
+        onBack = onBack,
+        footerText = "© 2025 English Idioms Collection"
+    ) { isVerticalLayout, _ ->
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
+                .fillMaxWidth(0.8f)
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center

@@ -7,7 +7,10 @@ import org.ato.project.components.NavItem
 import org.ato.project.components.NavigationTemplate
 
 @Composable
-fun ConsonantClustersPage(onBack: () -> Unit) {
+fun ConsonantClustersPage(
+    onBack: () -> Unit,
+    onNavigateToLesson: (String) -> Unit = {}
+) {
     // Define categories with their items for consonant clusters
     val categories = listOf(
         NavCategory(
@@ -20,7 +23,7 @@ fun ConsonantClustersPage(onBack: () -> Unit) {
                     title = "(/sp/, /st/, /sk/, /sm/)", 
                     description = "Артикуляция и практика",
                     categoryId = "initial",
-                    onClick = { /* TODO */ }
+                    onClick = { onNavigateToLesson("initial-1") }
                 )
             )
         ),

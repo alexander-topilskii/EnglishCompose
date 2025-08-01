@@ -9,7 +9,10 @@ import org.ato.project.components.NavigationTemplate
 @Composable
 fun HomeScreen(
     onNavigateToDetails: () -> Unit,
-    onNavigateToExamples: () -> Unit
+    onNavigateToExamples: () -> Unit,
+    onNavigateToVerbs: () -> Unit = { /* Fallback */ },
+    onNavigateToAdjectives: () -> Unit = { /* Fallback */ },
+    onNavigateToNouns: () -> Unit = { /* Fallback */ }
 ) {
     // Define categories with their items
     val categories = listOf(
@@ -23,21 +26,21 @@ fun HomeScreen(
                     title = "Глаголы", 
                     description = "Изучение английских глаголов",
                     categoryId = "words",
-                    onClick = { /* TODO */ }
+                    onClick = onNavigateToVerbs
                 ),
                 NavItem(
                     id = "adjectives",
                     title = "Прилагательные", 
                     description = "Изучение английских прилагательных",
                     categoryId = "words",
-                    onClick = { /* TODO */ }
+                    onClick = onNavigateToAdjectives
                 ),
                 NavItem(
                     id = "nouns",
                     title = "Существительные", 
                     description = "Изучение английских существительных",
                     categoryId = "words",
-                    onClick = { /* TODO */ }
+                    onClick = onNavigateToNouns
                 )
             )
         ),
@@ -58,21 +61,21 @@ fun HomeScreen(
                     title = "Согласные звуки", 
                     description = "Артикуляция и практика согласных звуков",
                     categoryId = "pronunciation",
-                    onClick = { /* TODO */ }
+                    onClick = { onNavigateToExamples() }
                 ),
                 NavItem(
                     id = "consonant-clusters",
                     title = "Сочетания согласных", 
                     description = "Практика произношения сложных сочетаний",
                     categoryId = "pronunciation",
-                    onClick = { /* TODO */ }
+                    onClick = { onNavigateToExamples() }
                 ),
                 NavItem(
                     id = "word-stress",
                     title = "Ударение в словах", 
                     description = "Правила и практика ударений",
                     categoryId = "pronunciation",
-                    onClick = { /* TODO */ }
+                    onClick = { onNavigateToExamples() }
                 )
             )
         ),
@@ -94,7 +97,8 @@ fun HomeScreen(
 
     // Use the NavigationTemplate component
     NavigationTemplate(
-        title = "Compose Web App 2.0 github",
+        title = "English Learning App",
+        subtitle = "Выберите раздел для изучения",
         categories = categories
     )
 }

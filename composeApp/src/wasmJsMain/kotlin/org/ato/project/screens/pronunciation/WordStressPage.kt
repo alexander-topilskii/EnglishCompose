@@ -7,7 +7,10 @@ import org.ato.project.components.NavItem
 import org.ato.project.components.NavigationTemplate
 
 @Composable
-fun WordStressPage(onBack: () -> Unit) {
+fun WordStressPage(
+    onBack: () -> Unit,
+    onNavigateToLesson: (String) -> Unit = {}
+) {
     // Define categories with their items for word stress
     val categories = listOf(
         NavCategory(
@@ -20,7 +23,7 @@ fun WordStressPage(onBack: () -> Unit) {
                     title = "Основы word stress", 
                     description = "(REcord vs reCORD) — практика",
                     categoryId = "basics",
-                    onClick = { /* TODO */ }
+                    onClick = { onNavigateToLesson("basics-1") }
                 )
             )
         ),

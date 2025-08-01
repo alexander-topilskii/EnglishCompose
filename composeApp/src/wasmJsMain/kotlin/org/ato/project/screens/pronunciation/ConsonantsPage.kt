@@ -7,7 +7,10 @@ import org.ato.project.components.NavItem
 import org.ato.project.components.NavigationTemplate
 
 @Composable
-fun ConsonantsPage(onBack: () -> Unit) {
+fun ConsonantsPage(
+    onBack: () -> Unit,
+    onNavigateToLesson: (String) -> Unit = {}
+) {
     // Define categories with their items for consonant pronunciation
     val categories = listOf(
         NavCategory(
@@ -20,7 +23,7 @@ fun ConsonantsPage(onBack: () -> Unit) {
                     title = "(/θ/, /ʃ/, /tʃ/, /h/)", 
                     description = "Артикуляция и минимальные пары",
                     categoryId = "voiceless",
-                    onClick = { /* TODO */ }
+                    onClick = { onNavigateToLesson("voiceless-1") }
                 )
             )
         ),

@@ -7,7 +7,10 @@ import org.ato.project.components.NavItem
 import org.ato.project.components.NavigationTemplate
 
 @Composable
-fun VowelsPage(onBack: () -> Unit) {
+fun VowelsPage(
+    onBack: () -> Unit,
+    onNavigateToLesson: (String) -> Unit = {}
+) {
     // Define categories with their items for vowel pronunciation
     val categories = listOf(
         NavCategory(
@@ -20,14 +23,14 @@ fun VowelsPage(onBack: () -> Unit) {
                     title = "Короткие гласные (/ɪ/, /æ/, /e/)", 
                     description = "Практика минимальных пар",
                     categoryId = "short-vowels",
-                    onClick = { /* TODO */ }
+                    onClick = { onNavigateToLesson("short-vowels-1") }
                 ),
                 NavItem(
                     id = "short-vowels-2",
                     title = "Короткие гласные (/ʊ/, /ə/)", 
                     description = "Произношение и различение",
                     categoryId = "short-vowels",
-                    onClick = { /* TODO */ }
+                    onClick = { onNavigateToLesson("short-vowels-2") }
                 )
             )
         ),
@@ -41,7 +44,7 @@ fun VowelsPage(onBack: () -> Unit) {
                     title = "Длинные гласные (/i:/, /u:/, /ɜ:/)", 
                     description = "Практика произношения",
                     categoryId = "long-vowels",
-                    onClick = { /* TODO */ }
+                    onClick = { onNavigateToLesson("long-vowels-1") }
                 )
             )
         ),
@@ -55,7 +58,7 @@ fun VowelsPage(onBack: () -> Unit) {
                     title = "(/ɪ/ vs /i:/, /æ/ vs /ɜ:/, /e/ vs /ɪ/)", 
                     description = "Минимальные пары",
                     categoryId = "cross-practice",
-                    onClick = { /* TODO */ }
+                    onClick = { onNavigateToLesson("cross-practice-1") }
                 )
             )
         ),
@@ -69,21 +72,21 @@ fun VowelsPage(onBack: () -> Unit) {
                     title = "(/eɪ/, /aɪ/, /ɪə/)", 
                     description = "Произношение и минимальные пары",
                     categoryId = "diphthongs",
-                    onClick = { /* TODO */ }
+                    onClick = { onNavigateToLesson("diphthongs-1") }
                 ),
                 NavItem(
                     id = "diphthongs-2",
                     title = "(/oʊ/, /aʊ/, /ɔɪ/, /eə/)", 
                     description = "Практика произношения",
                     categoryId = "diphthongs",
-                    onClick = { /* TODO */ }
+                    onClick = { onNavigateToLesson("diphthongs-2") }
                 ),
                 NavItem(
                     id = "diphthongs-3",
                     title = "Дополнительные дифтонги (/ʊə/)", 
                     description = "Произношение и различение",
                     categoryId = "diphthongs",
-                    onClick = { /* TODO */ }
+                    onClick = { onNavigateToLesson("diphthongs-3") }
                 )
             )
         ),
@@ -97,7 +100,7 @@ fun VowelsPage(onBack: () -> Unit) {
                     title = "Повторение и аудиоанализ", 
                     description = "Закрепление изученного материала",
                     categoryId = "review",
-                    onClick = { /* TODO */ }
+                    onClick = { onNavigateToLesson("vowels-review") }
                 )
             )
         )
