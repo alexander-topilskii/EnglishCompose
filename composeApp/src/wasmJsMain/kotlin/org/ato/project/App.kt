@@ -1,7 +1,7 @@
 package org.ato.project
 
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -12,7 +12,6 @@ import org.ato.project.screens.pronunciation.*
 import org.ato.project.screens.pronunciation.lessons.*
 import org.ato.project.screens.words.*
 import org.ato.project.navigation.NavigationHandler
-import org.ato.project.loginWithGoogle
 import kotlin.js.JsAny
 
 @Composable
@@ -20,6 +19,13 @@ fun App() {
     Configure()
 
     MaterialTheme {
+        var userName by remember { mutableStateOf<String?>(null) }
+        LaunchedEffect(firebaseApp) {
+            if (firebaseApp != null) {
+                userName = getUserDisplayName()
+            }
+        }
+
         val navController = rememberNavController()
         NavHost(navController = navController, startDestination = "home") {
             // Home screen
@@ -31,14 +37,22 @@ fun App() {
                     onNavigateToAdjectives = { navController.navigate("adjectives") },
                     onNavigateToNouns = { navController.navigate("nouns") },
                     navController = navController,
-
+                    userName = userName,
+                    isLoggedIn = userName != null,
                     onLogin = {
-                        println("sdfdsfsd")
-                        loginWithGoogle()
-                        println("sds : ${getUserDisplayName()}")
+                        loginWithGoogle { success ->
+                            if (success) {
+                                userName = getUserDisplayName()
+                            }
+                        }
+                    },
+                    onLogout = {
+                        logout { success ->
+                            if (success) {
+                                userName = null
+                            }
+                        }
                     }
-
-                    
 
                 )
             }
@@ -296,6 +310,23 @@ fun loginWithGoogle(onResult: (Boolean) -> Unit = {}) {
         })
     } catch (e: Throwable) {
         println("Exception during login: ${e.message}")
+        onResult(false)
+    }
+}
+
+fun logout(onResult: (Boolean) -> Unit = {}) {
+    try {
+        val auth = getAuth(firebaseApp)
+        signOut(auth).then({ _: JsAny ->
+            onResult(true)
+            null
+        }, { error: JsAny ->
+            println("Logout error: ${'$'}{error ?: error.toString()}")
+            onResult(false)
+            null
+        })
+    } catch (e: Throwable) {
+        println("Exception during logout: ${'$'}{e.message}")
         onResult(false)
     }
 }

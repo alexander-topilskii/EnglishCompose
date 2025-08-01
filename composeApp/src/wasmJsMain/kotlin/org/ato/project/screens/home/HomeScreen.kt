@@ -17,7 +17,10 @@ fun HomeScreen(
     onNavigateToAdjectives: () -> Unit = { /* Fallback */ },
     onNavigateToNouns: () -> Unit = { /* Fallback */ },
     navController: NavController? = null,
-    onLogin: () -> Unit
+    userName: String? = null,
+    isLoggedIn: Boolean = false,
+    onLogin: () -> Unit,
+    onLogout: () -> Unit
 ) {
     // Define categories with their items
     val categories = listOf(
@@ -117,11 +120,13 @@ fun HomeScreen(
     // Use the NavigationTemplate component
     NavigationTemplate(
         title = "English Learning App",
-        subtitle = "Выберите раздел для изучения",
+        subtitle = userName?.let { "Привет, $it!" } ?: "Выберите раздел для изучения",
         categories = categories,
         actions = {
-            Button(onClick = onLogin) {
-                Text("Login")
+            if (isLoggedIn) {
+                Button(onClick = onLogout) { Text("Logout") }
+            } else {
+                Button(onClick = onLogin) { Text("Login") }
             }
         }
     )
