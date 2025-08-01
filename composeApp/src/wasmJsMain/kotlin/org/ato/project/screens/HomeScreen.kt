@@ -100,7 +100,7 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Compose Web App") },
+                title = { Text("Compose Web App 2.0 github") },
             )
         }
     ) { padding ->
