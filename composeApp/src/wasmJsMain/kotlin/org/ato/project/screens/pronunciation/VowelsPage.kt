@@ -26,11 +26,25 @@ fun VowelsPage(
                     onClick = { onNavigateToLesson("short-vowels-1") }
                 ),
                 NavItem(
-                    id = "short-vowels-2",
-                    title = "Короткие гласные (/ʊ/, /ə/)", 
-                    description = "Произношение и различение",
+                    id = "i-sound",
+                    title = "/ɪ/ — Практика минимальных пар", 
+                    description = "ship/sheep, bit/beat",
                     categoryId = "short-vowels",
-                    onClick = { onNavigateToLesson("short-vowels-2") }
+                    onClick = { onNavigateToLesson("i-sound") }
+                ),
+                NavItem(
+                    id = "ae-sound",
+                    title = "/æ/ — Практика минимальных пар", 
+                    description = "cat/cut, bad/bed",
+                    categoryId = "short-vowels",
+                    onClick = { onNavigateToLesson("ae-sound") }
+                ),
+                NavItem(
+                    id = "e-sound",
+                    title = "/e/ — Практика минимальных пар", 
+                    description = "bed/bad, pen/pin",
+                    categoryId = "short-vowels",
+                    onClick = { onNavigateToLesson("e-sound") }
                 )
             )
         ),
@@ -45,62 +59,83 @@ fun VowelsPage(
                     description = "Практика произношения",
                     categoryId = "long-vowels",
                     onClick = { onNavigateToLesson("long-vowels-1") }
+                ),
+                NavItem(
+                    id = "i-long-sound",
+                    title = "/i:/ — Практика минимальных пар", 
+                    description = "sheep/ship, beat/bit",
+                    categoryId = "long-vowels",
+                    onClick = { onNavigateToLesson("i-long-sound") }
+                ),
+                NavItem(
+                    id = "u-long-sound",
+                    title = "/u:/ — Практика минимальных пар", 
+                    description = "pool/pull, food/foot",
+                    categoryId = "long-vowels",
+                    onClick = { onNavigateToLesson("u-long-sound") }
+                ),
+                NavItem(
+                    id = "er-long-sound",
+                    title = "/ɜ:/ — Практика минимальных пар", 
+                    description = "bird/bad, fur/far",
+                    categoryId = "long-vowels",
+                    onClick = { onNavigateToLesson("er-long-sound") }
                 )
             )
         ),
         NavCategory(
-            id = "cross-practice", 
-            name = "Перекрестная практика", 
+            id = "other-vowels", 
+            name = "Другие гласные", 
             color = Color(0xFF3F51B5),
             items = listOf(
                 NavItem(
-                    id = "cross-practice-1",
-                    title = "(/ɪ/ vs /i:/, /æ/ vs /ɜ:/, /e/ vs /ɪ/)", 
-                    description = "Минимальные пары",
-                    categoryId = "cross-practice",
-                    onClick = { onNavigateToLesson("cross-practice-1") }
+                    id = "other-vowels-1",
+                    title = "Другие гласные (/ʌ/, /ɒ/, /ɔ:/, /ɑ:/)", 
+                    description = "Сравнение и практика",
+                    categoryId = "other-vowels",
+                    onClick = { onNavigateToLesson("other-vowels-1") }
+                ),
+                NavItem(
+                    id = "uh-sound",
+                    title = "/ʌ/ — Практика", 
+                    description = "cut/cat, luck/lack",
+                    categoryId = "other-vowels",
+                    onClick = { onNavigateToLesson("uh-sound") }
+                ),
+                NavItem(
+                    id = "o-short-sound",
+                    title = "/ɒ/ — Практика", 
+                    description = "hot/hat, pot/pet",
+                    categoryId = "other-vowels",
+                    onClick = { onNavigateToLesson("o-short-sound") }
+                ),
+                NavItem(
+                    id = "o-long-sound",
+                    title = "/ɔ:/ — Практика", 
+                    description = "thought/taught, law/low",
+                    categoryId = "other-vowels",
+                    onClick = { onNavigateToLesson("o-long-sound") }
+                ),
+                NavItem(
+                    id = "a-long-sound",
+                    title = "/ɑ:/ — Практика", 
+                    description = "car/cat, father/further",
+                    categoryId = "other-vowels",
+                    onClick = { onNavigateToLesson("a-long-sound") }
                 )
             )
         ),
         NavCategory(
-            id = "diphthongs", 
-            name = "Дифтонги", 
+            id = "schwa", 
+            name = "Нейтральный гласный", 
             color = Color(0xFF26A69A),
             items = listOf(
                 NavItem(
-                    id = "diphthongs-1",
-                    title = "(/eɪ/, /aɪ/, /ɪə/)", 
-                    description = "Произношение и минимальные пары",
-                    categoryId = "diphthongs",
-                    onClick = { onNavigateToLesson("diphthongs-1") }
-                ),
-                NavItem(
-                    id = "diphthongs-2",
-                    title = "(/oʊ/, /aʊ/, /ɔɪ/, /eə/)", 
-                    description = "Практика произношения",
-                    categoryId = "diphthongs",
-                    onClick = { onNavigateToLesson("diphthongs-2") }
-                ),
-                NavItem(
-                    id = "diphthongs-3",
-                    title = "Дополнительные дифтонги (/ʊə/)", 
-                    description = "Произношение и различение",
-                    categoryId = "diphthongs",
-                    onClick = { onNavigateToLesson("diphthongs-3") }
-                )
-            )
-        ),
-        NavCategory(
-            id = "review", 
-            name = "Повторение", 
-            color = Color(0xFFEF6C00),
-            items = listOf(
-                NavItem(
-                    id = "vowels-review",
-                    title = "Повторение и аудиоанализ", 
-                    description = "Закрепление изученного материала",
-                    categoryId = "review",
-                    onClick = { onNavigateToLesson("vowels-review") }
+                    id = "schwa-sound",
+                    title = "Шва (/ə/) и его роль в безударных слогах", 
+                    description = "Практика редукции",
+                    categoryId = "schwa",
+                    onClick = { onNavigateToLesson("schwa-sound") }
                 )
             )
         )
@@ -108,7 +143,8 @@ fun VowelsPage(
 
     // Use the NavigationTemplate component with back button
     NavigationTemplate(
-        title = "Гласные звуки",
+        title = "Гласные звуки и их перекрестное сравнение",
+        subtitle = "Выберите категорию гласных звуков для изучения",
         categories = categories,
         onBack = onBack
     )
