@@ -12,6 +12,10 @@ import org.ato.project.screens.pronunciation.*
 import org.ato.project.screens.pronunciation.lessons.*
 import org.ato.project.screens.words.*
 import org.ato.project.navigation.NavigationHandler
+import org.ato.project.navigation.navigateWithHistory
+import org.ato.project.navigation.goBackWithHistory
+import kotlinx.browser.window
+import org.w3c.dom.events.Event
 import kotlin.js.JsAny
 
 @Composable
@@ -27,15 +31,29 @@ fun App() {
         }
 
         val navController = rememberNavController()
+
+        // Integrate browser history so the device back button navigates
+        // through the app instead of closing it.
+        LaunchedEffect(Unit) {
+            window.history.replaceState(null, "", "#home")
+        }
+        DisposableEffect(navController) {
+            val listener: (Event) -> Unit = {
+                navController.popBackStack()
+            }
+            window.addEventListener("popstate", listener)
+            onDispose { window.removeEventListener("popstate", listener) }
+        }
+
         NavHost(navController = navController, startDestination = "home") {
             // Home screen
             composable("home") {
                 HomeScreen(
-                    onNavigateToDetails = { navController.navigate("idioms") },
-                    onNavigateToExamples = { navController.navigate("vowels") },
-                    onNavigateToVerbs = { navController.navigate("verbs") },
-                    onNavigateToAdjectives = { navController.navigate("adjectives") },
-                    onNavigateToNouns = { navController.navigate("nouns") },
+                    onNavigateToDetails = { navController.navigateWithHistory("idioms") },
+                    onNavigateToExamples = { navController.navigateWithHistory("vowels") },
+                    onNavigateToVerbs = { navController.navigateWithHistory("verbs") },
+                    onNavigateToAdjectives = { navController.navigateWithHistory("adjectives") },
+                    onNavigateToNouns = { navController.navigateWithHistory("nouns") },
                     navController = navController,
                     userName = userName,
                     isLoggedIn = userName != null,
@@ -59,231 +77,231 @@ fun App() {
 
             // Idioms pages
             composable("idioms") {
-                IdiomsPage(onBack = { navController.popBackStack() })
+                IdiomsPage(onBack = { navController.goBackWithHistory() })
             }
 
             // Pronunciation navigation pages
             composable("vowels") {
                 val navigationHandler = NavigationHandler(navController)
                 VowelsPage(
-                    onBack = { navController.popBackStack() },
+                    onBack = { navController.goBackWithHistory() },
                     onNavigateToLesson = { lessonId ->
-                        navController.navigate("lesson-$lessonId")
+                        navController.navigateWithHistory("lesson-$lessonId")
                     }
                 )
             }
             composable("diphthongs") {
                 val navigationHandler = NavigationHandler(navController)
                 DiphthongsPage(
-                    onBack = { navController.popBackStack() },
+                    onBack = { navController.goBackWithHistory() },
                     onNavigateToLesson = { lessonId ->
-                        navController.navigate("lesson-$lessonId")
+                        navController.navigateWithHistory("lesson-$lessonId")
                     }
                 )
             }
             composable("consonants") {
                 val navigationHandler = NavigationHandler(navController)
                 ConsonantsPage(
-                    onBack = { navController.popBackStack() },
+                    onBack = { navController.goBackWithHistory() },
                     onNavigateToLesson = { lessonId ->
-                        navController.navigate("lesson-$lessonId")
+                        navController.navigateWithHistory("lesson-$lessonId")
                     }
                 )
             }
             composable("word-stress") {
                 val navigationHandler = NavigationHandler(navController)
                 WordStressPage(
-                    onBack = { navController.popBackStack() },
+                    onBack = { navController.goBackWithHistory() },
                     onNavigateToLesson = { lessonId ->
-                        navController.navigate("lesson-$lessonId")
+                        navController.navigateWithHistory("lesson-$lessonId")
                     }
                 )
             }
             composable("intonation") {
                 val navigationHandler = NavigationHandler(navController)
                 IntonationPage(
-                    onBack = { navController.popBackStack() },
+                    onBack = { navController.goBackWithHistory() },
                     onNavigateToLesson = { lessonId ->
-                        navController.navigate("lesson-$lessonId")
+                        navController.navigateWithHistory("lesson-$lessonId")
                     }
                 )
             }
             composable("russian-comparison") {
                 val navigationHandler = NavigationHandler(navController)
                 RussianComparisonPage(
-                    onBack = { navController.popBackStack() },
+                    onBack = { navController.goBackWithHistory() },
                     onNavigateToLesson = { lessonId ->
-                        navController.navigate("lesson-$lessonId")
+                        navController.navigateWithHistory("lesson-$lessonId")
                     }
                 )
             }
 
             // Pronunciation lesson pages - Short Vowels
             composable("lesson-short-vowels-1") {
-                ShortVowel1Lesson(onBack = { navController.popBackStack() })
+                ShortVowel1Lesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-i-sound") {
-                IShortSoundLesson(onBack = { navController.popBackStack() })
+                IShortSoundLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-ae-sound") {
-                AeSoundLesson(onBack = { navController.popBackStack() })
+                AeSoundLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-e-sound") {
-                EShortSoundLesson(onBack = { navController.popBackStack() })
+                EShortSoundLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-short-vowels-2") {
-                ShortVowel2Lesson(onBack = { navController.popBackStack() })
+                ShortVowel2Lesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-schwa-sound") {
-                SchwaLesson(onBack = { navController.popBackStack() })
+                SchwaLesson(onBack = { navController.goBackWithHistory() })
             }
 
             // Pronunciation lesson pages - Long Vowels
             composable("lesson-long-vowels-1") {
-                LongVowel1Lesson(onBack = { navController.popBackStack() })
+                LongVowel1Lesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-i-long-sound") {
-                ILongSoundLesson(onBack = { navController.popBackStack() })
+                ILongSoundLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-u-long-sound") {
-                ULongSoundLesson(onBack = { navController.popBackStack() })
+                ULongSoundLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-er-long-sound") {
-                ErLongSoundLesson(onBack = { navController.popBackStack() })
+                ErLongSoundLesson(onBack = { navController.goBackWithHistory() })
             }
 
             // Pronunciation lesson pages - Other Vowels
             composable("lesson-other-vowels-1") {
-                OtherVowels1Lesson(onBack = { navController.popBackStack() })
+                OtherVowels1Lesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-uh-sound") {
-                UhSoundLesson(onBack = { navController.popBackStack() })
+                UhSoundLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-o-short-sound") {
-                OShortSoundLesson(onBack = { navController.popBackStack() })
+                OShortSoundLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-o-long-sound") {
-                OLongSoundLesson(onBack = { navController.popBackStack() })
+                OLongSoundLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-a-long-sound") {
-                ALongSoundLesson(onBack = { navController.popBackStack() })
+                ALongSoundLesson(onBack = { navController.goBackWithHistory() })
             }
 
             // Pronunciation lesson pages - Diphthongs
             composable("lesson-centering-diphthongs-1") {
-                CenteringDiphthongs1Lesson(onBack = { navController.popBackStack() })
+                CenteringDiphthongs1Lesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-ir-diphthong") {
-                IrDiphthongLesson(onBack = { navController.popBackStack() })
+                IrDiphthongLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-er-diphthong") {
-                ErDiphthongLesson(onBack = { navController.popBackStack() })
+                ErDiphthongLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-ur-diphthong") {
-                UrDiphthongLesson(onBack = { navController.popBackStack() })
+                UrDiphthongLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-closing-diphthongs-1") {
-                ClosingDiphthongs1Lesson(onBack = { navController.popBackStack() })
+                ClosingDiphthongs1Lesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-ei-diphthong") {
-                EiDiphthongLesson(onBack = { navController.popBackStack() })
+                EiDiphthongLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-ai-diphthong") {
-                AiDiphthongLesson(onBack = { navController.popBackStack() })
+                AiDiphthongLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-oi-diphthong") {
-                OiDiphthongLesson(onBack = { navController.popBackStack() })
+                OiDiphthongLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-ou-diphthong") {
-                OuDiphthongLesson(onBack = { navController.popBackStack() })
+                OuDiphthongLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-au-diphthong") {
-                AuDiphthongLesson(onBack = { navController.popBackStack() })
+                AuDiphthongLesson(onBack = { navController.goBackWithHistory() })
             }
 
             // Pronunciation lesson pages - Consonants
             composable("lesson-plosives-1") {
-                PlosivesLesson(onBack = { navController.popBackStack() })
+                PlosivesLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-p-b-pair") {
-                PBPairLesson(onBack = { navController.popBackStack() })
+                PBPairLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-t-d-pair") {
-                TDPairLesson(onBack = { navController.popBackStack() })
+                TDPairLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-k-g-pair") {
-                KGPairLesson(onBack = { navController.popBackStack() })
+                KGPairLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-fricatives-1") {
-                FricativesLesson(onBack = { navController.popBackStack() })
+                FricativesLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-th-voiced-voiceless") {
-                ThVoicedVoicelessLesson(onBack = { navController.popBackStack() })
+                ThVoicedVoicelessLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-s-z-pair") {
-                SZPairLesson(onBack = { navController.popBackStack() })
+                SZPairLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-sh-zh-pair") {
-                ShZhPairLesson(onBack = { navController.popBackStack() })
+                ShZhPairLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-affricates-1") {
-                AffricatesLesson(onBack = { navController.popBackStack() })
+                AffricatesLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-nasals-approx-1") {
-                NasalsApproximantsLesson(onBack = { navController.popBackStack() })
+                NasalsApproximantsLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-l-sound") {
-                LSoundLesson(onBack = { navController.popBackStack() })
+                LSoundLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-r-sound") {
-                RSoundLesson(onBack = { navController.popBackStack() })
+                RSoundLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-ng-sound") {
-                NgSoundLesson(onBack = { navController.popBackStack() })
+                NgSoundLesson(onBack = { navController.goBackWithHistory() })
             }
 
             // Pronunciation lesson pages - Stress and Rhythm
             composable("lesson-word-stress-1") {
-                WordStressLesson(onBack = { navController.popBackStack() })
+                WordStressLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-sentence-rhythm-1") {
-                SentenceRhythmLesson(onBack = { navController.popBackStack() })
+                SentenceRhythmLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-stress-pairs") {
-                StressPairsLesson(onBack = { navController.popBackStack() })
+                StressPairsLesson(onBack = { navController.goBackWithHistory() })
             }
 
             // Pronunciation lesson pages - Intonation
             composable("lesson-rising-falling") {
-                RisingFallingLesson(onBack = { navController.popBackStack() })
+                RisingFallingLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-linking-sounds") {
-                LinkingSoundsLesson(onBack = { navController.popBackStack() })
+                LinkingSoundsLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-tongue-twisters") {
-                TongueTwistersLesson(onBack = { navController.popBackStack() })
+                TongueTwistersLesson(onBack = { navController.goBackWithHistory() })
             }
 
             // Pronunciation lesson pages - Russian Comparison
             composable("lesson-missing-sounds-1") {
-                MissingSoundsLesson(onBack = { navController.popBackStack() })
+                MissingSoundsLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-vowel-issues-1") {
-                VowelIssuesLesson(onBack = { navController.popBackStack() })
+                VowelIssuesLesson(onBack = { navController.goBackWithHistory() })
             }
             composable("lesson-correction-1") {
-                CorrectionLesson(onBack = { navController.popBackStack() })
+                CorrectionLesson(onBack = { navController.goBackWithHistory() })
             }
 
             // Words pages
             composable("verbs") {
-                VerbsScreen(onBack = { navController.popBackStack() })
+                VerbsScreen(onBack = { navController.goBackWithHistory() })
             }
             composable("adjectives") {
-                AdjectivesScreen(onBack = { navController.popBackStack() })
+                AdjectivesScreen(onBack = { navController.goBackWithHistory() })
             }
             composable("nouns") {
-                NounsScreen(onBack = { navController.popBackStack() })
+                NounsScreen(onBack = { navController.goBackWithHistory() })
             }
         }
     }
