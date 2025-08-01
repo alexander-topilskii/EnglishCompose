@@ -2,6 +2,8 @@ package org.ato.project.screens.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.navigation.NavController
 import org.ato.project.components.NavCategory
 import org.ato.project.components.NavItem
@@ -14,7 +16,8 @@ fun HomeScreen(
     onNavigateToVerbs: () -> Unit = { /* Fallback */ },
     onNavigateToAdjectives: () -> Unit = { /* Fallback */ },
     onNavigateToNouns: () -> Unit = { /* Fallback */ },
-    navController: NavController? = null
+    navController: NavController? = null,
+    onLogin: () -> Unit
 ) {
     // Define categories with their items
     val categories = listOf(
@@ -115,6 +118,11 @@ fun HomeScreen(
     NavigationTemplate(
         title = "English Learning App",
         subtitle = "Выберите раздел для изучения",
-        categories = categories
+        categories = categories,
+        actions = {
+            Button(onClick = onLogin) {
+                Text("Login")
+            }
+        }
     )
 }

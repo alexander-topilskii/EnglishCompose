@@ -12,6 +12,7 @@ import org.ato.project.screens.pronunciation.*
 import org.ato.project.screens.pronunciation.lessons.*
 import org.ato.project.screens.words.*
 import org.ato.project.navigation.NavigationHandler
+import org.ato.project.loginWithGoogle
 
 @Composable
 fun App() {
@@ -28,7 +29,8 @@ fun App() {
                     onNavigateToVerbs = { navController.navigate("verbs") },
                     onNavigateToAdjectives = { navController.navigate("adjectives") },
                     onNavigateToNouns = { navController.navigate("nouns") },
-                    navController = navController
+                    navController = navController,
+                    onLogin = { loginWithGoogle() }
                 )
             }
 
