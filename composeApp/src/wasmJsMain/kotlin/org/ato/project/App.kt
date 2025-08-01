@@ -30,7 +30,15 @@ fun App() {
                     onNavigateToAdjectives = { navController.navigate("adjectives") },
                     onNavigateToNouns = { navController.navigate("nouns") },
                     navController = navController,
-                    onLogin = { loginWithGoogle() }
+
+                    onLogin = {
+                        println("sdfdsfsd")
+                        loginWithGoogle()
+                        println("sds : ${getUserDisplayName()}")
+                    }
+
+                    
+
                 )
             }
 
@@ -263,5 +271,30 @@ fun App() {
                 NounsScreen(onBack = { navController.popBackStack() })
             }
         }
+    }
+}
+
+
+
+fun loginWithGoogle(onResult: (Boolean) -> Unit = {}) {
+    try {
+        println("Login with Google1")
+        val auth = getAuth(firebaseApp)
+
+        val provider = GoogleAuthProvider()
+        println("Login with Google2")
+
+        signInWithPopup(auth, provider).then({ _: JsAny ->
+            println("Login successful ${getUserDisplayName()}")
+            onResult(true)
+            null
+        }, { error: JsAny ->
+            println("Login error: ${error ?: error.toString()}")
+            onResult(false)
+            null
+        })
+    } catch (e: Throwable) {
+        println("Exception during login: ${e.message}")
+        onResult(false)
     }
 }

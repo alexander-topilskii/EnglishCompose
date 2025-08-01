@@ -1,28 +1,30 @@
-package org.ato.project
 
-import kotlin.js.Promise
+@file:JsModule("firebase/auth")
 
-@JsModule("firebase/auth")
+
+
+
+
+
+
+
 @JsName("getAuth")
 external fun getAuth(app: JsAny? = definedExternally): JsAny
 
-@JsModule("firebase/auth")
-external class GoogleAuthProvider
-
-@JsModule("firebase/auth")
 @JsName("signInWithPopup")
 external fun signInWithPopup(auth: JsAny, provider: JsAny): Promise<JsAny>
 
-fun loginWithGoogle(onResult: (Boolean) -> Unit = {}) {
-    val auth = getAuth(firebaseApp)
-    val provider = GoogleAuthProvider()
-    signInWithPopup(auth, provider as JsAny).then({ _: JsAny ->
-        println("Login successful")
-        onResult(true)
-        null
-    }, { error: JsAny ->
-        println("Login error: ${error}")
-        onResult(false)
-        null
-    })
+@JsName("GoogleAuthProvider")
+external class GoogleAuthProvider : JsAny
+
+external interface FirebaseAuth : JsAny {
+    val currentUser: FirebaseUser?
 }
+
+external interface FirebaseUser : JsAny {
+    val displayName: String?
+}
+
+
+
+
