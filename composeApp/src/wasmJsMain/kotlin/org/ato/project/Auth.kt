@@ -1,8 +1,11 @@
+
 @file:JsModule("firebase/auth")
 
-package org.ato.project
 
-import kotlin.js.Promise
+
+
+
+
 
 
 @JsName("getAuth")
@@ -21,5 +24,7 @@ external interface FirebaseAuth : JsAny {
 external interface FirebaseUser : JsAny {
     val displayName: String?
 }
+
+
 
 

@@ -2,9 +2,11 @@ package org.ato.project
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+
 import getAnalytics
 import org.ato.project.firebase.initializeApp
 import kotlin.js.JsAny
+
 
 
 // In your main file
@@ -26,11 +28,13 @@ val firebaseConfig: JsAny = js("""
 fun Configure() {
     LaunchedEffect(Unit) {
         try {
+
             println("Firebase initialize..... $firebaseApp")
             // Debug: log the config
             firebaseApp = initializeApp(firebaseConfig)
             val analytics = getAnalytics(firebaseApp)
             println("Firebase initialized successfully $firebaseApp")
+
         } catch (e: Throwable) {
             println("Firebase init error: ${e.message}")
             // For more details

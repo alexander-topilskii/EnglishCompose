@@ -30,11 +30,15 @@ fun App() {
                     onNavigateToAdjectives = { navController.navigate("adjectives") },
                     onNavigateToNouns = { navController.navigate("nouns") },
                     navController = navController,
+
                     onLogin = {
                         println("sdfdsfsd")
                         loginWithGoogle()
                         println("sds : ${getUserDisplayName()}")
                     }
+
+                    
+
                 )
             }
 
