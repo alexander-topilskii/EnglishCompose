@@ -6,23 +6,33 @@ import kotlin.js.Promise
 @JsName("getAuth")
 external fun getAuth(app: JsAny? = definedExternally): JsAny
 
+// Correct way to use GoogleAuthProvider in JS
 @JsModule("firebase/auth")
-external class GoogleAuthProvider
+external val GoogleAuthProvider: JsAny
 
 @JsModule("firebase/auth")
 @JsName("signInWithPopup")
 external fun signInWithPopup(auth: JsAny, provider: JsAny): Promise<JsAny>
 
+val provider: JsAny = js("new GoogleAuthProvider.GoogleAuthProvider()")
+
 fun loginWithGoogle(onResult: (Boolean) -> Unit = {}) {
-    val auth = getAuth(firebaseApp)
-    val provider = GoogleAuthProvider()
-    signInWithPopup(auth, provider as JsAny).then({ _: JsAny ->
-        println("Login successful")
-        onResult(true)
-        null
-    }, { error: JsAny ->
-        println("Login error: ${error}")
+    try {
+        val auth = getAuth(firebaseApp)
+        // Create a new provider using JS interop
+
+        signInWithPopup(auth, provider).then({ _: JsAny ->
+//            println("Login successful")
+            onResult(true)
+            null
+        }, { error: JsAny ->
+//            println("Login error: ${error}")
+            onResult(false)
+            null
+        })
+    } catch (e: Throwable) {
+//        println("Exception during login: ${e.message}")
+        e.printStackTrace()
         onResult(false)
-        null
-    })
+    }
 }
