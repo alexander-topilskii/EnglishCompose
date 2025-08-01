@@ -10,6 +10,9 @@ external fun getAuth(app: JsAny? = definedExternally): JsAny
 @JsName("signInWithPopup")
 external fun signInWithPopup(auth: JsAny, provider: JsAny): Promise<JsAny>
 
+@JsName("signOut")
+external fun signOut(auth: JsAny): Promise<JsAny>
+
 @JsName("GoogleAuthProvider")
 external class GoogleAuthProvider : JsAny
 
